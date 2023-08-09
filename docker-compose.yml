@@ -1,0 +1,31 @@
+version: "3.5"
+
+services:
+
+  lambda:
+    build:
+      context: ./docker/lambda
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./web/laravel:/var/task"
+      - "./web/laravel/storage:/tmp/storage"
+    environment:
+      HANDLER: public/index.php
+
+  mysql:
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
+    expose:
+      - "3306"
+    volumes:
+      - "./.data/mysql/var/lib/mysql:/var/lib/mysql"
+      - "./.data/mysql/var/log/mysql:/var/log/mysql"
+    ports:
+      - "3306:3306"
