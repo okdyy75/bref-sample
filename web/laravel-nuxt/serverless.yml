@@ -1,12 +1,31 @@
-service: laravel
+frameworkVersion: ^3.33.0
+
+service: laravel-nuxt
 
 provider:
     name: aws
-    # The AWS region in which to deploy (us-east-1 is the default)
-    region: us-east-1
-    # Environment variables
-    environment:
-        APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage
+    region: ap-northeast-1
+    stage: dev
+
+custom:
+    env: ${file(./config.${opt:stage, self:provider.stage}.yml)}
+    apigwBinary:
+        types:
+            - '*/*'
+    customDomain:
+        rest:
+            domainName: ${self:custom.env.SERVICE_DOMAIN}
+            certificateName: ${self:custom.env.SERVICE_DOMAIN}
+            stage: ${self:provider.stage}
+            basePath: ''
+            endpointType: regional
+            securityPolicy: tls_1_2
+        http:
+            domainName: ${self:custom.env.API_DOMAIN}
+            certificateName: ${self:custom.env.API_DOMAIN}
+            basePath: ''
+            endpointType: regional
+            securityPolicy: tls_1_2
 
 package:
     # Files and directories to exclude from deployment
@@ -16,8 +35,30 @@ package:
         - '!resources/assets/**'
         - '!storage/**'
         - '!tests/**'
+        - '!frontend/node_modules/**'
 
 functions:
+
+    nuxt:
+        runtime: nodejs18.x
+        handler: ./frontend/.output/server/index.handler
+        url: true
+        events:
+            - http:
+                path: /
+                method: ANY
+            - http:
+                path: /{proxy+}
+                method: ANY
+            # - http:
+            #     integration: http-proxy
+            #     path: /api/{proxy+}
+            #     method: ANY
+            #     request:
+            #         uri: ${self:custom.env.API_DOMAIN}/api/{proxy}
+            #         parameters:
+            #             paths:
+            #                 proxy: true # mark path parameter as required
 
     # This function runs the Laravel website/API
     web:
@@ -25,7 +66,12 @@ functions:
         runtime: php-81-fpm
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
         events:
-            - httpApi: '*'
+            - httpApi:
+                path: /api
+                method: ANY
+            - httpApi:
+                path: /api/{proxy+}
+                method: ANY
 
     # This function lets us run artisan commands in Lambda
     artisan:
@@ -41,3 +87,5 @@ functions:
 plugins:
     # We need to include the Bref plugin
     - ./vendor/bref/bref
+    - serverless-apigw-binary
+    - serverless-domain-manager # uncomment the plugin
