@@ -11,6 +11,8 @@ services:
     volumes:
       - "./web/laravel:/var/task"
       - "./web/laravel/storage:/tmp/storage"
+      # - "./web/laravel-react:/var/task"
+      # - "./web/laravel-react/storage:/tmp/storage"
     environment:
       HANDLER: public/index.php
 

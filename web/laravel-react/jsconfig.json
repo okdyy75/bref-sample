@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "es2022",
+        "moduleResolution": "Node",
+        "jsx": "react",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "resources/js/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "public"
+    ]
+}

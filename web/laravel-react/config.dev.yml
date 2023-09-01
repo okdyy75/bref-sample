@@ -1,0 +1,6 @@
+SERVICE_DOMAIN: dev-bref-sample.okdyy75.com
+API_DOMAIN: dev-bref-sample.okdyy75.com
+
+# laravel
+APP_ENV: dev
+APP_KEY: xxxxxxxxxx

@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/img/{filename}', [ImgController::class, 'index']);
 
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
