@@ -1,12 +1,14 @@
-service: laravel
+frameworkVersion: ^3.33.0
+
+service: laravel-server
 
 provider:
     name: aws
-    # The AWS region in which to deploy (us-east-1 is the default)
-    region: us-east-1
-    # Environment variables
-    environment:
-        APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage
+    region: ap-northeast-1
+    stage: dev
+
+custom:
+    env: ${file(./config.${opt:stage, self:provider.stage}.yml)}
 
 package:
     # Files and directories to exclude from deployment
@@ -24,6 +26,10 @@ functions:
         handler: public/index.php
         runtime: php-81-fpm
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        environment:
+            APP_ENV: ${self:custom.env.APP_ENV}
+            APP_KEY: ${self:custom.env.APP_KEY}
+            BREF_BINARY_RESPONSES: '1'
         events:
             - httpApi: '*'
 
@@ -38,6 +44,16 @@ functions:
         #          rate: rate(1 minute)
         #          input: '"schedule:run"'
 
+constructs:
+    website:
+        type: server-side-website
+        domain: ${self:custom.env.SERVICE_DOMAIN}
+        certificate: arn:aws:acm:us-east-1:724443887064:certificate/4ccd82f4-2c64-4eaa-9bc5-d833189e356d
+        assets:
+            '/build/*': public/build
+            '/favicon.ico': public/favicon.ico
+            '/robots.txt': public/robots.txt
+
 plugins:
-    # We need to include the Bref plugin
-    - ./vendor/bref/bref
+  - ./vendor/bref/bref
+  - serverless-lift

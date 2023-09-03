@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DogController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/',             [IndexController::class, 'index']);
+Route::get('/dogs',         [DogController::class, 'index']);
+Route::get('/dogs/{breed}', [DogController::class, 'breed']);
+
+Route::get('/welcome', function () {
     return view('welcome');
 });

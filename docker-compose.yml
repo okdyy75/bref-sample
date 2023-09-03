@@ -13,6 +13,8 @@ services:
       - "./web/laravel/storage:/tmp/storage"
       # - "./web/laravel-react:/var/task"
       # - "./web/laravel-react/storage:/tmp/storage"
+      # - "./web/laravel-server:/var/task"
+      # - "./web/laravel-server/storage:/tmp/storage"
     environment:
       HANDLER: public/index.php
 
