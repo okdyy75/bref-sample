@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "local": "vite",
-        "build": "vite build --mode dev"
+        "build:dev": "vite build --mode development",
+        "build:prd": "vite build --mode production"
     },
     "devDependencies": {
         "axios": "^1.1.2",

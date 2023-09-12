@@ -5,6 +5,7 @@ service: laravel-nuxt
 provider:
     name: aws
     region: ap-northeast-1
+    profile: default
     stage: dev
 
 custom:
@@ -39,7 +40,7 @@ package:
 
 functions:
 
-    nuxt:
+    web:
         runtime: nodejs18.x
         handler: ./frontend/.output/server/index.handler
         url: true
@@ -61,10 +62,14 @@ functions:
             #                 proxy: true # mark path parameter as required
 
     # This function runs the Laravel website/API
-    web:
+    api:
         handler: public/index.php
         runtime: php-81-fpm
         timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        environment:
+            APP_ENV: ${self:custom.env.APP_ENV}
+            APP_KEY: ${self:custom.env.APP_KEY}
+            BREF_BINARY_RESPONSES: '1'
         events:
             - httpApi:
                 path: /api
@@ -85,7 +90,6 @@ functions:
         #          input: '"schedule:run"'
 
 plugins:
-    # We need to include the Bref plugin
     - ./vendor/bref/bref
     - serverless-apigw-binary
     - serverless-domain-manager # uncomment the plugin

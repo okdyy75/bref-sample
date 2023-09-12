@@ -1,2 +1,8 @@
 SERVICE_DOMAIN: dev-bref-sample.okdyy75.com
-API_DOMAIN: dev-bref-sample-api.okdyy75.com
+API_DOMAIN: dev-bref-sample.okdyy75.com
+SERVICE_DOMAIN_CERTIFICATE: arn:aws:acm:us-east-1:xxxxxxxxxx:certificate/4ccd82f4-2c64-4eaa-9bc5-d833189e356d
+SERVICE_DOMAIN_HOSTED_ZONE_ID: Z02799582J2VQVN2AAMVN
+
+# laravel
+APP_ENV: development
+APP_KEY: xxxxxxxxxx

@@ -2,8 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "local": "vite --port 5173",
-        "build": "vite build --mode dev"
+        "local": "vite",
+        "build:dev": "vite build --mode development",
+        "build:prd": "vite build --mode production"
     },
     "devDependencies": {
         "@types/react": "^18.2.20",

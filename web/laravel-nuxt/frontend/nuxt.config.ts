@@ -5,7 +5,7 @@ const env = require(`./env.${environment}.js`);
 export default defineNuxtConfig({
     app: {
         head: {
-            title: "Vue Nuxt Test",
+            title: `${env.public.APP_ENV}-Bref Nuxt Test`,
             meta: [
                 { charset: "utf-8" },
                 {
