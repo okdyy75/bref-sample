@@ -11,6 +11,8 @@ services:
     volumes:
       - "./web/laravel:/var/task"
       - "./web/laravel/storage:/tmp/storage"
+      # - "./web/laravel-nuxt:/var/task"
+      # - "./web/laravel-nuxt/storage:/tmp/storage"
       # - "./web/laravel-react:/var/task"
       # - "./web/laravel-react/storage:/tmp/storage"
       # - "./web/laravel-server:/var/task"
