@@ -4,6 +4,7 @@ const env = require(`./env.${environment}.js`);
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
+        buildAssetsDir: '/build/_nuxt/',
         head: {
             title: `${env.public.APP_ENV}-Bref Nuxt Test`,
             meta: [
@@ -19,7 +20,7 @@ export default defineNuxtConfig({
                 },
             ],
             link: [
-                { rel: "icon", type: "image/x-icon", href: "/img/favicon.ico" },
+                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
             ],
         },
     },
@@ -37,14 +38,14 @@ export default defineNuxtConfig({
         // compressPublicAssets: true,
     },
 
-    vite: {
-        vue: {
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
-            },
-        },
-    },
+    // vite: {
+    //     vue: {
+    //         template: {
+    //             transformAssetUrls: {
+    //                 base: null,
+    //                 includeAbsolute: false,
+    //             },
+    //         },
+    //     },
+    // },
 });

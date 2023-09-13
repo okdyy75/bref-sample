@@ -6,7 +6,7 @@
       {{ dog }}
     </pre>
     <div>
-        <img src="/dog.png" alt="dog" />
+        <img src="~/assets/img/dog.png" alt="dog" />
     </div>
     <p>
       {{ healthcheck }}
