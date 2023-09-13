@@ -24,7 +24,7 @@ package:
 functions:
 
     web:
-        runtime: nodejs18.x
+        runtime: nodejs16.x
         handler: ./frontend/.output/server/index.handler
         url: true
         events:
