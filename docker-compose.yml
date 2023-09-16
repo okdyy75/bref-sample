@@ -19,6 +19,7 @@ services:
       # - "./web/laravel-server/storage:/tmp/storage"
     environment:
       HANDLER: public/index.php
+      DOCUMENT_ROOT: public
 
   mysql:
     build:
