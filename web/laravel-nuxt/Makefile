@@ -1,6 +1,7 @@
 .PHONY: build clean deploy
 
 clean:
+	docker compose exec lambda php artisan config:clear
 	rm -rf ./frontend/.nuxt
 	rm -rf ./frontend/.output
 

@@ -1,4 +1,7 @@
-.PHONY: build deploy
+.PHONY: build clean deploy
+
+clean:
+	docker compose exec lambda php artisan config:clear
 
 build:
 	npm run build:dev
@@ -6,8 +9,8 @@ build:
 build-prd:
 	npm run build:prd
 
-deploy: build
+deploy: clean build
 	sls deploy --verbose
 
-deploy-prd: build-prd
+deploy-prd: clean build-prd
 	sls deploy --stage prd --verbose
