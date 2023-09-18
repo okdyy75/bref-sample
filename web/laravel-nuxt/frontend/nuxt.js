@@ -1,6 +1,6 @@
 const { Nuxt } = require('nuxt-start');
 
-const config = require('./nuxt.config.js');
+const config = require('./nuxt.config');
 
 const nuxt = new Nuxt({ ...config, dev: false });
 
