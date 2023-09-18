@@ -19,6 +19,7 @@ package:
         - '!resources/assets/**'
         - '!storage/**'
         - '!tests/**'
+        - '!.env'
         - '!frontend/node_modules/**'
 
 functions:
