@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "local": "vite",
+        "local": "dotenv -e .env vite",
         "build:dev": "vite build --mode development",
         "build:prd": "vite build --mode production"
     },
@@ -12,6 +12,7 @@
         "@types/react-helmet-async": "^1.0.3",
         "@vitejs/plugin-react": "^4.0.4",
         "axios": "^1.1.2",
+        "dotenv-cli": "^7.3.0",
         "laravel-vite-plugin": "^0.7.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
