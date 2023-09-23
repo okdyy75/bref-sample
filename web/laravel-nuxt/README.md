@@ -1,3 +1,44 @@
+# Bref+Nuxt3(SPA+SSR)構成
+
+## 事前準備
+- カスタムドメインの作成。詳しくは[こちら](../../README.md#カスタムドメイン作成)
+- config.{stage}.ymlにカスタムドメインの`ARN`と`ホストゾーンID`、各環境変数を設定
+- docker-composeのvolume向き先を`./web/laravel-nuxt:/var/task`にしておく
+
+docker-compose.yml
+
+```yml
+    volumes:
+      - "./web/laravel-nuxt:/var/task"
+      - "./web/laravel-nuxt/storage:/tmp/storage"
+```
+
+## コマンド
+
+```
+# ローカル実行
+cd frontend
+npm run local
+
+# nuxt側urlを開く
+open http://localhost:3000
+
+# デプロイ
+make deploy
+
+# リソース削除
+sls remove --verbose
+
+# prd環境デプロイ
+make deploy-prd
+
+# prd環境リソース削除
+sls remove --stage prd --verbose
+```
+
+
+------------------------------
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
