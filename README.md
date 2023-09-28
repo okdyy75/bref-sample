@@ -57,3 +57,7 @@ docker compose exec -it lambda bash
 # コンテナ終了
 docker compose down
 ```
+
+**詳しくは[動かして覚えるBref(Laravel)入門
+](https://zenn.dev/okdyy75/books/bref-hands-on)を見てください！**
+
